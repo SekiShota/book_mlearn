@@ -1,31 +1,29 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import cv2
-import numpy as np
 
-#webカメラから入力開始
-cap=cv2.VideoCapture(0)
+# VideoCapture オブジェクトを取得します
+# デフォルトでは0が内蔵カメラのIDだが、Snap Cameraを使用している影響でIDは1となっていた
+# editorのterminalではなく、単体のterminalから実行するとできる
+capture = cv2.VideoCapture(1)
 
-while True:
-    #カメラから画像を読み込む
-    _, frame=cap.read()
-    
-    #画像を縮小表示する
-    frame=cv2.resize(frame, (640,480))
-    #ウィンドウに画像を出力
-    cv2.imshow('OpenCV Camera', frame)
-    #ESCかEnterキーでループを抜ける
-    k=cv2.waitKey(1)
-    
-    if k==13 or k==27:
+# capture関数からカメラからの読み込みができているか判定
+# isOpend関数の戻り値はTrue, False
+# print(capture.isOpened())
+
+while(True):
+    #read関数の引数はretとframe
+    #retは読み込みができているかの判定でTrue, False
+    #frameはカメラが捉えた情報
+    ret, frame = capture.read()
+
+    #ウィンドウに表示
+    cv2.imshow('Mask Checker',frame)
+
+    #qをキーボードで入力するとカメラ停止
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-#カメラを開放
-cap.release()
+#メモリを解放する
+capture.release()
+
 #ウィンドウを閉じる
 cv2.destroyAllWindows()
-
