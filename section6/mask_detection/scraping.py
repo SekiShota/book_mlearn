@@ -1,8 +1,6 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-# import japanize_matplotlib
-# import seaborn as sns
 
 from icrawler.builtin import BingImageCrawler
 import os
@@ -34,9 +32,9 @@ gather_path='./gather/*.jpg'
 mask_people_path='./mask_people/*.jpg'
 
 keywords=['集合写真', 'マスク 東京']
-num=1000
+num=300
 
-# scraping('./image/gather/', keywords[0], num)
+scraping('./image/gather/', keywords[0], num)
 scraping('./image/mask_people/', keywords[1], num)
 
 # """
@@ -63,5 +61,5 @@ def resize_image(path, w, h):
 width=300
 height=300
 
-# resize_image(gather_path, width, height)
+resize_image(gather_path, width, height)
 resize_image(mask_people_path, width, height)
