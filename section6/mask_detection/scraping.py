@@ -35,7 +35,7 @@ keywords=['集合写真', 'マスク 東京']
 num=300
 
 scraping('./image/gather/', keywords[0], num)
-scraping('./image/mask_people/', keywords[1], num)
+scraping('./image/mask_on_entry/', keywords[1], num)
 
 # """
 # 画像をリサイズするメソッド

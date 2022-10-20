@@ -3,14 +3,18 @@ import cv2, dlib, sys, glob, pprint
 #入力ディレクトリの指定
 #gather: マスクなしの人が写った集合写真
 #mask_people: マスクをつけた人が写った画像
-indir="./image/gather"
-indir="./image/mask_people"
+# indir="./image/gather"
+# indir="./image/mask_people"
+indir="./image/mask_on_entry"
+
 
 #出力ディレクトリの指定
 #mask_off: マスクなし
 #mask_on: マスクあり
 outdir="./image/mask_off"
 outdir="./image/mask_on"
+# outdir="./image/mask_on1"
+
 
 #暫定的な画像のID
 fid=1000
