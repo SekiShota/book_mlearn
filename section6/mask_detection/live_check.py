@@ -2,6 +2,18 @@ import tensorflow.keras as keras
 from keras.models import load_model
 import cv2, dlib, pprint, os
 import numpy as np
+import pygame.mixer
+import time
+
+"""
+マスクをつけていない時にアラームを鳴らす関数
+"""
+def sound(f,i,n):
+    pygame.mixer.init() #初期化します
+    pygame.mixer.music.load(f) #音声ファイルを読み込みます
+    pygame.mixer.music.play(i) #再生します
+    time.sleep(n) #再生時間を指定します
+    pygame.mixer.music.stop() #終了します
 
 #結果ラベル
 res_labels=['NO MASK!', 'OK']
@@ -47,13 +59,24 @@ while True:
         v=res.argmax()
         print(res_labels[v])
 
-        #枠を描画, マスクない時(v=0)は赤で強調する
-        color=green if v==1 else red
-        border=2 if v==1 else 5
+        #枠を描画, マスクない時(v=0)は赤で強調する,
+        #マスクあり：サイレンを鳴らします
+        #マスクなし：サイレンを鳴らします
+        # color=green if v==1 else red
+        # border=2 if v==1 else 5
+        if v==1:
+            color=green
+            border=2
+            sound("Quiz-Correct_Answer02-1.mp3",2,3)
+        else:
+            color=red
+            border=10
+            sound("Warning-Siren05-02(Fast-Long).mp3",2,5)
+
         cv2.rectangle(frame, (x1,y1), (x2,y2), color, thickness=border)
 
         #テキストを描画
-        cv2.putText(frame, res_labels[v], (x1,y1-5), cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, thickness=1)
+        cv2.putText(frame, res_labels[v], (x1,y1-5), cv2.FONT_HERSHEY_SIMPLEX, 1.0, color, thickness=2)
 
     #結果を保存
     if len(dets)>0:

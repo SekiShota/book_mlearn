@@ -1,4 +1,4 @@
-import tensorflow.keras as keras
+# import tensorflow.keras as keras
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
@@ -129,7 +129,7 @@ print("正解率 = ",score[1], 'loss = ',score[0])
 print("実行時間：", end-start)
 
 #モデルの保存
-model.save('mask_model.h5')
+# model.save('mask_model.h5')
 
 #学習の様子を可視化
 plt.plot(hist.history['accuracy'])
